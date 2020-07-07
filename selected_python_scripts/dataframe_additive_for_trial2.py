@@ -7,12 +7,9 @@ Created on Mon Mar 16 11:51:41 2020
 
 #Loop through each simulation folder
 import os
-#import collections
-#import re
 import numpy as np
 import pandas as pd
-#import csv
-#import glob
+
 
 #call this function only with filename so that it returns everything in the file
 ## i.e. readFile(filename) gives all 30.000 values
@@ -22,6 +19,7 @@ import pandas as pd
 
 # call the function with path and 2 numbers to return the specified columns in that range
 ## i.e. readFile(filename, 100, 300) gives value in the range 100 and 300 
+
 def readFile(filename, first_col=-1, last_col=-1):
     
     #Read the file from the address
@@ -56,30 +54,19 @@ end = start + nloci - 1
 #data = data[start:(end + 1)]
 
 
-#Turn dat file to csv
- #with open(filename, "rb") as dat_file, open(filename, 'w') as csv_file:
-     #csv_writer = csv.writer(csv_file)
- #for line in dat_file:
-       # row = [field.strip() for field in line.split('|')]
-        #if len(row) == 6 and row[3] and row[4]:
-            #csv_writer.writerow(row)
 
 
 # This is where the execution code begins:
 os.chdir("C:/Users/Celia/Desktop/Raph/Scans")
-rootdir = 'C:/Users/Celia/Desktop/Raph/data_Project/additivenew'
+rootdir = 'C:/Users/Celia/Desktop/Raph/additive_debug_last_ones'
 
 
 # Create an empty table (filled with zeros) that will contain those data
-data = readFile("C:/Users/Celia/Desktop/Raph/data_Project/additivenew/sim_scaleA_1_1_1_scaleI_0_0_0_r1/genome_Fst.dat")
+data = readFile("C:/Users/Celia/Desktop/Raph/additive_debug_last_ones/sim_scaleA_1_1_1_scaleI_0_0_0_r1/genome_Fst.dat")
 print(len(data))
-
 #X = np.empty(shape=[3, len(data)])
 
 X = pd.DataFrame()
-
-
-# Needs the right dimensions
 
 # Loop through simulation folders
 for subdir in os.listdir(rootdir):
@@ -97,15 +84,17 @@ for subdir in os.listdir(rootdir):
         print(path)
     newRow = pd.DataFrame([data])
     #print(data)
-
     
+    #if os.path.getsize(data) == 0:
+        #os.remove(data)
+   
     # Append to the table
     X = X.append(newRow, ignore_index = True)
 
     # here i am in the loop
     
-print("Imported dataset:")                  
-print(X)
+print("Imported dataset:")
+#print(X)
 
 
 print("-----------------------------------------")
@@ -114,16 +103,10 @@ print("-----------------------------------------")
 
 # here i am out of the loop
 #Store the scan's content in a temporary variable and 
-np.savetxt("C:/Users/Celia/Desktop/Raph/Scans/output_table_A_all_trial_finalspace.csv", X)
-    
+np.savetxt("C:/Users/Celia/Desktop/Raph/Scans/output_table_A_debug_last_ones.csv", X)
     
     
  
-
-    
-#Append info to a table
-    
-#import files
     
 
     

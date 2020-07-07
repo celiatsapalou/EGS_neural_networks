@@ -31,8 +31,6 @@ def readFile(filename, first_col=-1, last_col=-1):
        data = np.frombuffer(data, np.float64)
        if (first_col == -1 & last_col == -1):
            return data
-       #if (first_col != -1 & last_col == -1):
-           #return data[first_col]
     
        return data[first_col:(last_col + 1)]
       
@@ -57,23 +55,14 @@ end = start + nloci - 1
 
 
 #Turn dat file to csv
- #with open(filename, "rb") as dat_file, open(filename, 'w') as csv_file:
-     #csv_writer = csv.writer(csv_file)
- #for line in dat_file:
-       # row = [field.strip() for field in line.split('|')]
-        #if len(row) == 6 and row[3] and row[4]:
-            #csv_writer.writerow(row)
-
-
 # This is where the execution code begins:
 os.chdir("C:/Users/Celia/Desktop/Raph/Scans")
-rootdir = 'C:/Users/Celia/Desktop/Raph/data_Project/simulations_third_trial'
+rootdir = 'C:/Users/Celia/Desktop/Raph/last_debugged_epistatic'
 
 
 # Create an empty table (filled with zeros) that will contain those data
-data = readFile("C:/Users/Celia/Desktop/Raph/data_Project/simulations_third_trial\sim_scaleA_1_1_1_scaleI_0_0_0_r7/genome_Fst.dat")
+data = readFile("C:/Users/Celia/Desktop/Raph/last_debugged_epistatic/sim_scaleA_0_0_0_scaleI_1_1_1_r1/genome_Fst.dat")
 print(len(data))
-#X = np.empty(shape=[3, len(data)])
 
 X = pd.DataFrame()
 
@@ -86,15 +75,12 @@ for subdir in os.listdir(rootdir):
     # Address of the file
     path = os.path.join(rootdir, subdir, "genome_Fst.dat")
     
-    # Read the file
-    # iloc[row, colunmn] gives data in specified row and column
-    # you can specify a range with the column : for example 100:1002
-    # get range of rows 100 - 101  ---> newRow.iloc[:,100:102]
-    
+
     data = readFile(path, start, end)
     if (len(data) == 0): 
         print(path)
     newRow = pd.DataFrame([data])
+    
     #print(data)
 
     
@@ -113,15 +99,11 @@ print("-----------------------------------------")
 
 # here i am out of the loop
 #Store the scan's content in a temporary variable and 
-np.savetxt("C:/Users/Celia/Desktop/Raph/Scans/output_table_A_trial_final.csv", X)
+np.savetxt("C:/Users/Celia/Desktop/Raph/Scans/epistatic_last_four_runs.csv", X)
     
     
- 
-
     
 #Append info to a table
-    
-#import files
     
 
     
